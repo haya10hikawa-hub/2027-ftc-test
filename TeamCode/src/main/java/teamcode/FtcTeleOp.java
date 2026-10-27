@@ -31,6 +31,7 @@ import ftclib.driverio.FtcGamepad;
 import ftclib.robotcore.FtcOpMode;
 import teamcode.indicators.RumbleIndicator;
 import teamcode.subsystems.DriveBase;
+import teamcode.subsystems.Motor;
 import teamcode.vision.Vision;
 import trclib.robotcore.TrcDbgTrace;
 import trclib.robotcore.TrcRobot;
@@ -268,6 +269,11 @@ public class FtcTeleOp extends FtcOpMode
         switch (button)
         {
             case A:
+                if (robot.motor != null)
+                {
+                    // Rotate while the button is held, stop when released.
+                    robot.motor.subsystemAction(pressed? Motor.Action.Rotate: Motor.Action.Stop, null);
+                }
                 break;
 
             case B:

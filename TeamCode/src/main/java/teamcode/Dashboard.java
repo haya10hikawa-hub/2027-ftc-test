@@ -41,7 +41,8 @@ public class Dashboard
     {
         public static boolean updateDashboardEnabled = RobotParams.Preferences.updateDashboard;
         public static FtcAuto.Alliance alliance = FtcAuto.Alliance.Blue;
-        public static FtcAuto.AutoChoices autoChoices = FtcAuto.autoChoices;
+        // Do not reference FtcAuto.autoChoices here: FTC Dashboard initializes @Config classes at app startup,
+        // before ftclib FtcDashboard exists, and constructing AutoChoices menus at that point makes it fail to start.
     }   //class DashboardParams
 
     @Config

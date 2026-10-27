@@ -167,11 +167,15 @@ public class DriveBase extends TrcSubsystem<DriveBase.Action>
                 .setDriveMotorInfo(
                     FtcMotorActuator.MotorType.DcMotor,
                     new String[] {"flDriveMotor", "frDriveMotor", "blDriveMotor", "brDriveMotor"},
-                    new boolean[] {true, false, true, false})
-                .setPinpointOdometry(
+                    new boolean[] {true, false, true, false});
+            // setPinpointOdometry accesses the hardware immediately, so skip it when the drive base is not in use.
+            if (RobotParams.Preferences.useDriveBase)
+            {
+                this.setPinpointOdometry(
                     "pinpointOdo", 0.0, -24.0 * 8, GoBildaPinpointDriver.GoBildaOdometryPods.goBILDA_4_BAR_POD,
-                    true, true, -180.0, 180.0)
-                .setPidStallDetectionEnabled(true)
+                    true, true, -180.0, 180.0);
+            }
+            this.setPidStallDetectionEnabled(true)
                 .setPidDriveParams(false)
                 .setPurePursuitDriveParams(6.0, true, false)
                 .setVisionInfo(Vision.aprilTagWebcamInfo, null, Vision.limelightInfo)
@@ -305,6 +309,11 @@ public class DriveBase extends TrcSubsystem<DriveBase.Action>
      */
     public void setDriveOrientation(TrcDriveBase.DriveOrientation orientation)
     {
+        if (robotBase == null)
+        {
+            return;
+        }
+
         robot.globalTracer.traceInfo(instanceName, "driveOrientation=" + orientation);
         robotBase.driveBase.setDriveOrientation(orientation, false);
 
@@ -394,6 +403,11 @@ public class DriveBase extends TrcSubsystem<DriveBase.Action>
     @Override
     public void subsystemAction(Action action, Object context)
     {
+        if (robotBase == null)
+        {
+            return;
+        }
+
         switch (action)
         {
             case ToggleDriveMode:
