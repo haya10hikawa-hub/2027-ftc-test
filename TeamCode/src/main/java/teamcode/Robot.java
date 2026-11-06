@@ -48,7 +48,6 @@ import trclib.vision.TrcVisionRelocalize;
 import trclib.vision.TrcVisionTargetInfo;
 
 import teamcode.subsystems.Motor;
-import teamcode.subsystems.Servo;
 
 /**
  * This class creates the robot object that consists of sensors, indicators, drive base and all the subsystems.
@@ -85,7 +84,6 @@ public class Robot
     //
 
     public Motor motor;
-    public Servo servo;
 
     //
     // Auto Tasks.
@@ -137,7 +135,6 @@ public class Robot
             {
                 // Create subsystems.
                 motor = new Motor();
-                servo = new Servo();
 
                 // Zero calibrate all subsystems only in Auto or if TeleOp is run standalone without prior Auto.
                 // There is no reason to zero calibrate again if Auto was run right before TeleOp.
