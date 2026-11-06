@@ -32,6 +32,7 @@ import ftclib.robotcore.FtcOpMode;
 import teamcode.indicators.RumbleIndicator;
 import teamcode.subsystems.DriveBase;
 import teamcode.subsystems.Motor;
+import teamcode.subsystems.Servo;
 import teamcode.vision.Vision;
 import trclib.robotcore.TrcDbgTrace;
 import trclib.robotcore.TrcRobot;
@@ -308,6 +309,15 @@ public class FtcTeleOp extends FtcOpMode
 
             case DpadUp:
             case DpadDown:
+                if (robot.servo != null)
+                {
+                    // Move the servo while the button is held, stop where it is when released.
+                    Servo.Action servoAction = button == FtcGamepad.ButtonType.DpadUp?
+                        Servo.Action.MoveUp: Servo.Action.MoveDown;
+                    robot.servo.subsystemAction(pressed? servoAction: Servo.Action.Stop, null);
+                }
+                break;
+
             case DpadLeft:
             case DpadRight:
                 break;

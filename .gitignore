@@ -89,3 +89,7 @@ lint/generated/
 lint/outputs/
 lint/tmp/
 # lint/reports/
+
+# Robot logs
+hub-logcat.txt
+robotControllerLog.txt
