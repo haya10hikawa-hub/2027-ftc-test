@@ -46,6 +46,7 @@ import trclib.sensor.TrcDigitalInput;
 import trclib.subsystem.TrcSubsystem;
 import trclib.vision.TrcVisionRelocalize;
 import trclib.vision.TrcVisionTargetInfo;
+// ↑【手順4】ここに追加したサブシステムの import を書く。例: import teamcode.subsystems.Intake;
 
 /**
  * This class creates the robot object that consists of sensors, indicators, drive base and all the subsystems.
@@ -80,6 +81,7 @@ public class Robot
     //
     // Other subsystems.
     //
+    // ↑【手順4】ここにサブシステムの変数を書く。例: public Intake intake;
 
     //
     // Auto Tasks.
@@ -130,6 +132,7 @@ public class Robot
             if (RobotParams.Preferences.useSubsystems)
             {
                 // Create subsystems.
+                // ↑【手順4】ここでサブシステムを生成する。例: intake = new Intake();
 
                 // Zero calibrate all subsystems only in Auto or if TeleOp is run standalone without prior Auto.
                 // There is no reason to zero calibrate again if Auto was run right before TeleOp.
@@ -575,3 +578,10 @@ public class Robot
     }   //speak
 
 }   //class Robot
+
+
+
+/*
+ * 【手順4】が終わったら、次は FtcTeleOp.java へ。
+ * FtcTeleOp.java 内の【手順5】のコメントに従ってボタンに割り当てる。
+ */

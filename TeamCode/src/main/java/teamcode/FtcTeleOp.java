@@ -36,6 +36,18 @@ import trclib.robotcore.TrcDbgTrace;
 import trclib.robotcore.TrcRobot;
 import trclib.timer.TrcTimer;
 
+
+
+/*
+ * 【新しいサブシステムを追加する人へ】
+ * Robot.java の【手順4】が終わったら、このファイルで以下を行う。
+ *   【手順5】driverButtonEvent() または operatorButtonEvent() の switch にボタンの処理を書く。
+ *            （import teamcode.subsystems.Intake; のように、使うサブシステムの import もこの上に追加する）
+ *   【手順6】ファイルの一番最後のコメントを参照（ビルド確認・コミット・Pull Request）。
+ * 「【手順」で検索すると該当箇所に飛べる。
+ */
+
+
 /**
  * This class contains the TeleOp Mode program.
  */
@@ -267,6 +279,16 @@ public class FtcTeleOp extends FtcOpMode
         robot.dashboard.displayPrintf(15, "Driver: " + button + "=" + (pressed? "pressed": "released"));
         switch (button)
         {
+            // ↑【手順5】ドライバー側のボタンに割り当てる場合は、この switch の case に書く。例:
+            //   case X:
+            //       if (robot.intake != null)
+            //       {
+            //           // 押している間だけ動き、離すと止まる
+            //           robot.intake.subsystemAction(pressed? Intake.Action.Run: Intake.Action.Stop, null);
+            //       }
+            //       break;
+            //   ※ すでに使われているボタンと被らないか確認すること。
+            //   ※ ファイル先頭に import teamcode.subsystems.Intake; も追加する。
             case A:
                 break;
 
@@ -348,6 +370,7 @@ public class FtcTeleOp extends FtcOpMode
         robot.dashboard.displayPrintf(15, "Operator: " + button + "=" + (pressed? "pressed": "released"));
         switch (button)
         {
+            // ↑【手順5】オペレーター側のボタンに割り当てる場合は、この switch の case に書く（書き方はドライバー側と同じ）。
             case A:
             case B:
             case X:
@@ -479,3 +502,10 @@ public class FtcTeleOp extends FtcOpMode
     }   //toggleDashboardUpdateMode
 
 }   //class FtcTeleOp
+
+
+
+/*
+ * 【手順6】ここまで終わったら、ビルドが通ることを確認してから、
+ * ブランチを切ってコミットし、Pull Request を作る。
+ */
